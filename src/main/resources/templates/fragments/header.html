@@ -3,11 +3,11 @@
 <body>
 <header th:fragment="header" class="site-header">
     <nav class="nav">
-        <a href="#top" class="nav-logo">petmily<em>day</em></a>
+        <a th:href="@{/}" class="nav-logo">portfolio</a>
         <div class="nav-links">
-            <a href="#overview">개요</a>
-            <a href="#stack">기술 스택</a>
-            <a href="#cases">문제 해결 사례</a>
+            <a th:href="@{/}">소개</a>
+            <a th:href="@{/projects/petmilyday}">petmilyday</a>
+            <span class="nav-disabled">널모아 (준비중)</span>
             <a href="#contact">Contact</a>
         </div>
     </nav>

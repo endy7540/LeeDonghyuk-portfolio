@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>petmilyday | 프로젝트 소개</title>
+    <title th:text="${profile.name} + ' | Portfolio'">Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -13,43 +13,17 @@
 
 <main>
 
-    <!-- HERO -->
+    <!-- PROFILE HERO -->
     <section class="hero">
-        <div class="hero-badge">🐾 Backend Portfolio Project</div>
-        <h1>반려동물 생활 플랫폼<br><span>petmilyday</span></h1>
-        <p class="hero-desc">
-            동물병원 예약, AI 증상 진단, 커뮤니티, 중고거래까지<br>
-            반려동물과 함께하는 일상을 지원하는 통합 서비스입니다.
-        </p>
+        <div class="hero-badge">👋 Portfolio</div>
+        <h1>
+            <span th:text="${profile.name}">이 동 혁</span><br>
+            <span th:text="${profile.tagline}">한 줄 소개</span>
+        </h1>
+        <p class="hero-desc" th:text="${profile.bio}">자기소개 문단</p>
         <div class="hero-cta">
-            <a href="#cases" class="btn btn-primary">문제 해결 사례 보기</a>
+            <a href="#featured" class="btn btn-primary">프로젝트 보기</a>
             <a href="#stack" class="btn btn-outline">기술 스택 보기</a>
-        </div>
-    </section>
-
-    <!-- OVERVIEW -->
-    <section id="overview" class="overview">
-        <div class="overview-grid">
-            <div class="overview-card">
-                <div class="overview-icon">🏥</div>
-                <h3>동물병원 예약</h3>
-                <p>병원 검색부터 예약, 진료기록 확인까지 원스톱으로 처리</p>
-            </div>
-            <div class="overview-card">
-                <div class="overview-icon">🤖</div>
-                <h3>AI 증상 자가진단</h3>
-                <p>간단한 증상 입력만으로 반려동물 건강 상태를 빠르게 확인</p>
-            </div>
-            <div class="overview-card">
-                <div class="overview-icon">💬</div>
-                <h3>커뮤니티 / 모임</h3>
-                <p>게시판, 댓글, 좋아요와 오프라인 모임 신청·승인 기능</p>
-            </div>
-            <div class="overview-card">
-                <div class="overview-icon">🔄</div>
-                <h3>중고거래</h3>
-                <p>안 쓰는 반려동물 용품을 이웃과 나누고 거래</p>
-            </div>
         </div>
     </section>
 
@@ -67,47 +41,67 @@
         </div>
     </section>
 
-    <!-- CASE STUDIES -->
-    <section id="cases" class="case-section">
-        <div class="sec-eyebrow">Case Study</div>
-        <h2 class="sec-title">문제 해결 사례</h2>
-        <p class="sec-sub">개발 과정에서 마주한 문제와 해결 접근을 정리했습니다.</p>
+    <!-- FEATURED PROJECT -->
+    <section id="featured" class="featured-section">
+        <div class="sec-eyebrow" th:text="${featured.badge}">Featured · Web</div>
+        <h2 class="sec-title" th:text="${featured.name}">petmilyday</h2>
+        <p class="sec-sub" th:text="${featured.tagline}">tagline</p>
 
-        <div class="case-list">
-            <article class="case-card" th:each="cs : ${caseStudies}">
-                <div class="case-head">
-                    <span class="case-badge" th:text="${cs.badge}">Badge</span>
-                    <h3 th:text="${cs.title}">Title</h3>
-                    <p class="case-summary" th:text="${cs.summary}">Summary</p>
+        <div class="browser-frame">
+            <div class="browser-bar">
+                <span class="browser-dot dot-red"></span>
+                <span class="browser-dot dot-yellow"></span>
+                <span class="browser-dot dot-green"></span>
+                <span class="browser-address" th:text="${featured.urlLabel}">localhost:8080</span>
+            </div>
+            <div class="browser-body">
+                <img th:if="${featured.screenshotUrl}" th:src="@{${featured.screenshotUrl}}" alt="screenshot">
+                <div class="browser-placeholder" th:unless="${featured.screenshotUrl}">
+                    🖼️ 스크린샷 추가 예정
+                </div>
+            </div>
+        </div>
+
+        <ul class="featured-highlights">
+            <li th:each="h : ${featured.highlights}" th:utext="${h}">highlight</li>
+        </ul>
+
+        <div class="featured-cta">
+            <a th:href="@{${featured.detailUrl}}" class="btn btn-primary">상세보기 →</a>
+            <a th:if="${featured.repoUrl}" th:href="${featured.repoUrl}" target="_blank" class="btn btn-outline">GitHub</a>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="project-section">
+        <div class="sec-eyebrow">Projects</div>
+        <h2 class="sec-title">다른 프로젝트</h2>
+        <p class="sec-sub">진행 중이거나 준비 중인 프로젝트입니다.</p>
+
+        <div class="project-grid">
+            <a th:each="p : ${projects}"
+               th:if="${p.slug != 'petmilyday'}"
+               th:href="${p.available} ? @{'/projects/' + ${p.slug}} : '#'"
+               th:classappend="${p.available} ? '' : ' is-disabled'"
+               class="project-card">
+
+                <div class="project-emoji" th:text="${p.emoji}">🐾</div>
+                <div class="project-status" th:if="${!p.available}">준비중</div>
+
+                <h3 th:text="${p.name}">Project</h3>
+                <p class="project-tagline" th:text="${p.tagline}">tagline</p>
+
+                <div class="project-meta" th:if="${p.available}">
+                    <span th:text="${p.period}">2026</span>
+                    <span th:text="${p.role}">Back-end</span>
                 </div>
 
-                <div class="case-body">
-                    <div class="case-col">
-                        <h4>⚠️ Problem</h4>
-                        <ul>
-                            <li th:each="item : ${cs.problem}" th:text="${item}">problem item</li>
-                        </ul>
-                    </div>
-                    <div class="case-col">
-                        <h4>🔍 Approach</h4>
-                        <ul>
-                            <li th:each="item : ${cs.approach}" th:text="${item}">approach item</li>
-                        </ul>
-                    </div>
-                    <div class="case-col">
-                        <h4>✅ Action</h4>
-                        <ul>
-                            <li th:each="item : ${cs.action}" th:text="${item}">action item</li>
-                        </ul>
-                    </div>
-                    <div class="case-col case-col-result">
-                        <h4>📈 Result</h4>
-                        <ul>
-                            <li th:each="item : ${cs.result}" th:text="${item}">result item</li>
-                        </ul>
-                    </div>
+                <div class="project-badges" th:if="${p.available}">
+                    <span class="badge" th:each="tag : ${p.techBadges}" th:text="${tag}">tag</span>
                 </div>
-            </article>
+
+                <div class="project-link" th:if="${p.available}">자세히 보기 →</div>
+            </a>
         </div>
     </section>
 
