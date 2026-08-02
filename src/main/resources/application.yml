@@ -1,0 +1,12 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: petmilyday-portfolio
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    com.petmilyday.portfolio: debug
