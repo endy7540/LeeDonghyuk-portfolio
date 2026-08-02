@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${project.name} + ' | Portfolio'">Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body id="top">
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+
+    <!-- PROJECT HERO -->
+    <section class="hero">
+        <a th:href="@{/}" class="back-link">← 소개로 돌아가기</a>
+        <div class="hero-badge">🐾 Backend Portfolio Project</div>
+        <h1>
+            <span th:text="${project.tagline}">프로젝트 태그라인</span><br>
+            <span th:text="${project.name}">Project Name</span>
+        </h1>
+        <p class="hero-desc" th:text="${project.description}">프로젝트 설명</p>
+
+        <div class="hero-meta">
+            <span><strong>기간</strong> · <span th:text="${project.period}">2026</span></span>
+            <span><strong>역할</strong> · <span th:text="${project.role}">Back-end Engineer</span></span>
+        </div>
+
+        <div class="hero-cta">
+            <a href="#cases" class="btn btn-primary">문제 해결 사례 보기</a>
+            <a href="#stack" class="btn btn-outline">기술 스택 보기</a>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="overview">
+        <div class="overview-grid">
+            <div class="overview-card" th:each="f : ${project.features}">
+                <div class="overview-icon" th:text="${f.icon}">🏥</div>
+                <h3 th:text="${f.title}">Feature</h3>
+                <p th:text="${f.desc}">Description</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section id="stack" class="stack-section">
+        <div class="sec-eyebrow">Tech Stack</div>
+        <h2 class="sec-title">사용 기술</h2>
+
+        <div class="stack-grid">
+            <div class="stack-card" th:each="tech : ${project.techStacks}">
+                <span class="stack-category" th:text="${tech.category}">Category</span>
+                <div class="stack-name" th:text="${tech.name}">Name</div>
+                <p class="stack-desc" th:text="${tech.desc}">Description</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="cases" class="case-section">
+        <div class="sec-eyebrow">Case Study</div>
+        <h2 class="sec-title">문제 해결 사례</h2>
+        <p class="sec-sub">개발 과정에서 마주한 문제와 해결 접근을 정리했습니다.</p>
+
+        <div class="case-list">
+            <article class="case-card" th:each="cs : ${project.caseStudies}">
+                <div class="case-head">
+                    <span class="case-badge" th:text="${cs.badge}">Badge</span>
+                    <h3 th:text="${cs.title}">Title</h3>
+                    <p class="case-summary" th:text="${cs.summary}">Summary</p>
+                </div>
+
+                <div class="case-body">
+                    <div class="case-col">
+                        <h4>⚠️ Problem</h4>
+                        <ul>
+                            <li th:each="item : ${cs.problem}" th:text="${item}">problem item</li>
+                        </ul>
+                    </div>
+                    <div class="case-col">
+                        <h4>🔍 Approach</h4>
+                        <ul>
+                            <li th:each="item : ${cs.approach}" th:text="${item}">approach item</li>
+                        </ul>
+                    </div>
+                    <div class="case-col">
+                        <h4>✅ Action</h4>
+                        <ul>
+                            <li th:each="item : ${cs.action}" th:text="${item}">action item</li>
+                        </ul>
+                    </div>
+                    <div class="case-col case-col-result">
+                        <h4>📈 Result</h4>
+                        <ul>
+                            <li th:each="item : ${cs.result}" th:text="${item}">result item</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
