@@ -5,9 +5,9 @@
 
 ## 스크린샷
 
-![메인 화면](src/main/java/com/petmilyday/portfolio/docs/screenshot-home.png)
+![메인 화면](./docs/screenshot-home.png)
 
-![문제 해결 사례](src/main/java/com/petmilyday/portfolio/docs/screenshot-case-study.png)
+![문제 해결 사례](./docs/screenshot-case-study.png)
 
 ## 페이지 구조
 

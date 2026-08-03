@@ -17,6 +17,8 @@ public class HomeController {
         model.addAttribute("projects", portfolioData.projectSummaries());
         model.addAttribute("techStacks", portfolioData.overallTechStacks());
         model.addAttribute("featured", portfolioData.featuredProject());
+        model.addAttribute("educations", portfolioData.educations());
+        model.addAttribute("certifications", portfolioData.certifications());
         return "index";
     }
 }

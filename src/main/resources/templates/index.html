@@ -17,13 +17,43 @@
     <section class="hero">
         <div class="hero-badge">👋 Portfolio</div>
         <h1>
-            <span th:text="${profile.name}">이 동 혁</span><br>
+            <span th:text="${profile.name}">이름</span><br>
             <span th:text="${profile.tagline}">한 줄 소개</span>
         </h1>
         <p class="hero-desc" th:text="${profile.bio}">자기소개 문단</p>
         <div class="hero-cta">
             <a href="#featured" class="btn btn-primary">프로젝트 보기</a>
             <a href="#stack" class="btn btn-outline">기술 스택 보기</a>
+        </div>
+    </section>
+
+    <!-- BACKGROUND: 학력 / 자격증 -->
+    <section class="background-section">
+        <div class="background-grid">
+            <div class="background-col">
+                <h3>🏫 학력 · 연수</h3>
+                <ul class="background-list">
+                    <li th:each="edu : ${educations}">
+                        <div class="bg-item-main">
+                            <span class="bg-item-title" th:text="${edu.name}">학교명</span>
+                            <span class="bg-item-detail" th:text="${edu.detail}">전공/과정</span>
+                        </div>
+                        <span class="bg-item-period" th:text="${edu.period}">기간</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="background-col">
+                <h3>🎫 자격증</h3>
+                <ul class="background-list">
+                    <li th:each="cert : ${certifications}">
+                        <div class="bg-item-main">
+                            <span class="bg-item-title" th:text="${cert.name}">자격증명</span>
+                            <span class="bg-item-detail" th:text="${cert.issuer}">발행처</span>
+                        </div>
+                        <span class="bg-item-period" th:text="${cert.date}">취득일</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 

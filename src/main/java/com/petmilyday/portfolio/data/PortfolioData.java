@@ -20,13 +20,42 @@ public class PortfolioData {
     // ---------- 프로필 ----------
     public ProfileDTO profile() {
         return ProfileDTO.builder()
-                .name("이름을 입력하세요")
-                .tagline("한 줄 소개를 입력하세요")
-                .bio("자기소개 문단을 입력하세요. 어떤 개발자인지, 어떤 것에 관심이 있는지 자유롭게 작성하면 됩니다.")
-                .email("example@gmail.com")
+                .name("이동혁")
+                .tagline("팀과 함께 성장하는 백엔드 개발자")
+                .bio("컴퓨터전자공학을 전공하며 하드웨어와 소프트웨어의 구조를 함께 배우고, " +
+                        "AI 에이전트 클라우드·보안 코딩 개발자 양성 과정을 통해 백엔드 개발자로서의 전문성을 쌓았습니다. " +
+                        "논리로 문제를 풀어나가는 과정에 매력을 느껴 개발자의 길을 선택했고, " +
+                        "팀 프로젝트를 통해 설계 단계의 소통과 협업이 만드는 차이를 배웠습니다. " +
+                        "혼자보다는 팀과 함께 성장하는 개발자를 지향합니다.")
+                .email("ldg7711@gmail.com")
                 .github("https://github.com/endy7540")
-                .phone("010-0000-0000")
+                .phone("010-7540-4991")
                 .build();
+    }
+
+    // ---------- 학력 / 연수이력 ----------
+    public List<EducationDTO> educations() {
+        return List.of(
+                EducationDTO.builder()
+                        .name("인덕대학교")
+                        .detail("컴퓨터전자공학과 (4.13 / 4.5)")
+                        .period("~ 2027.02 졸업예정")
+                        .build(),
+                EducationDTO.builder()
+                        .name("대우능력개발원")
+                        .detail("AI 에이전트 클라우드·보안 코딩 개발자 양성 과정")
+                        .period("2025.11 ~ 2026.08")
+                        .build()
+        );
+    }
+
+    // ---------- 자격증 ----------
+    public List<CertificationDTO> certifications() {
+        return List.of(
+                CertificationDTO.builder().name("SQL 개발자 (SQLD)").issuer("한국데이터산업진흥원").date("2026.03.27").build(),
+                CertificationDTO.builder().name("정보처리산업기사").issuer("한국산업인력공단").date("2차 결과 대기중").build(),
+                CertificationDTO.builder().name("MOS 2016 Master").issuer("Microsoft").date("2025.06.13").build()
+        );
     }
 
     // ---------- 전체 기술 스택 (자기소개 페이지) ----------
@@ -50,7 +79,7 @@ public class PortfolioData {
                 .name("petmilyday")
                 .tagline("반려동물의 보호자를 위한 병원 예약·리뷰·커뮤니티 통합 플랫폼")
                 .urlLabel("localhost:8080")
-                .screenshotUrl(null) // 실제 실행 화면 캡처 후 "/images/petmilyday-preview.png" 형태로 채워 넣으면 됩니다.
+                .screenshotUrl("/images/petmilyday-preview.png")
                 .highlights(List.of(
                         "<strong>동물병원 예약</strong> — 병원 검색부터 예약, 진료기록 확인까지 원스톱 처리",
                         "<strong>AI 증상 자가진단</strong> — 간단한 증상 입력만으로 건강 상태 빠르게 확인",
