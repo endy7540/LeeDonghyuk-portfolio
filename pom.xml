@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>com.petmilyday</groupId>
-    <artifactId>petmilyday-portfolio</artifactId>
+    <artifactId>LeeDonghyuk-portfolio</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>petmilyday-portfolio</name>
-    <description>petmilyday 프로젝트 소개용 포트폴리오 사이트</description>
+    <name>LeeDonghyuk-portfolio</name>
+    <description>petmilyday ?꾨줈?앺듃 ?뚭컻???ы듃?대━???ъ씠??/description>
 
     <properties>
         <java.version>17</java.version>

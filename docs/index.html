@@ -1,87 +1,56 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>?�동??| Portfolio</title>
+    <title th:text="${profile.name} + ' | Portfolio'">Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body id="top">
 
-<header class="site-header">
-    <nav class="nav">
-        <a href="./index.html" class="nav-logo">portfolio</a>
-        <div class="nav-links">
-            <a href="./index.html">?�개</a>
-            <a href="./projects/petmilyday/index.html">petmilyday</a>
-            <span class="nav-disabled">?�모??(준비중)</span>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <main>
 
     <!-- PROFILE HERO -->
     <section class="hero">
-        <div class="hero-badge">?�� Portfolio</div>
+        <div class="hero-badge">👋 Portfolio</div>
         <h1>
-            <span>?�동??/span><br>
-            <span>?��??�께 ?�장?�는 백엔??개발??/span>
+            <span th:text="${profile.name}">이름</span><br>
+            <span th:text="${profile.tagline}">한 줄 소개</span>
         </h1>
-        <p class="hero-desc">컴퓨?�전?�공?�을 ?�공?�며 ?�드?�어?� ?�프?�웨?�의 구조�??�께 배우�? AI ?�이?�트 ?�라?�드·보안 코딩 개발???�성 과정???�해 백엔??개발?�로?�의 ?�문?�을 ?�았?�니?? ?�리�?문제�??�?�나가??과정??매력???�껴 개발?�의 길을 ?�택?�고, ?� ?�로?�트�??�해 ?�계 ?�계???�통�??�업??만드??차이�?배웠?�니?? ?�자보다???��??�께 ?�장?�는 개발?��? 지?�합?�다.</p>
+        <p class="hero-desc" th:text="${profile.bio}">자기소개 문단</p>
         <div class="hero-cta">
-            <a href="#featured" class="btn btn-primary">?�로?�트 보기</a>
-            <a href="#stack" class="btn btn-outline">기술 ?�택 보기</a>
+            <a href="#featured" class="btn btn-primary">프로젝트 보기</a>
+            <a href="#stack" class="btn btn-outline">기술 스택 보기</a>
         </div>
     </section>
 
-    <!-- BACKGROUND: ?�력 / ?�격�?-->
+    <!-- BACKGROUND: 학력 / 자격증 -->
     <section class="background-section">
         <div class="background-grid">
             <div class="background-col">
-                <h3>?�� ?�력 · ?�수</h3>
+                <h3>🏫 학력 · 연수</h3>
                 <ul class="background-list">
-                    <li>
+                    <li th:each="edu : ${educations}">
                         <div class="bg-item-main">
-                            <span class="bg-item-title">?�덕?�?�교</span>
-                            <span class="bg-item-detail">컴퓨?�전?�공?�과 (4.13 / 4.5)</span>
+                            <span class="bg-item-title" th:text="${edu.name}">학교명</span>
+                            <span class="bg-item-detail" th:text="${edu.detail}">전공/과정</span>
                         </div>
-                        <span class="bg-item-period">~ 2027.02 졸업?�정</span>
-                    </li>
-                    <li>
-                        <div class="bg-item-main">
-                            <span class="bg-item-title">?�?�능?�개발원</span>
-                            <span class="bg-item-detail">AI ?�이?�트 ?�라?�드·보안 코딩 개발???�성 과정</span>
-                        </div>
-                        <span class="bg-item-period">2025.11 ~ 2026.08</span>
+                        <span class="bg-item-period" th:text="${edu.period}">기간</span>
                     </li>
                 </ul>
             </div>
             <div class="background-col">
-                <h3>?�� ?�격�?/h3>
+                <h3>🎫 자격증</h3>
                 <ul class="background-list">
-                    <li>
+                    <li th:each="cert : ${certifications}">
                         <div class="bg-item-main">
-                            <span class="bg-item-title">SQL 개발??(SQLD)</span>
-                            <span class="bg-item-detail">?�국?�이?�산?�진?�원</span>
+                            <span class="bg-item-title" th:text="${cert.name}">자격증명</span>
+                            <span class="bg-item-detail" th:text="${cert.issuer}">발행처</span>
                         </div>
-                        <span class="bg-item-period">2026.03.27</span>
-                    </li>
-                    <li>
-                        <div class="bg-item-main">
-                            <span class="bg-item-title">?�보처리?�업기사</span>
-                            <span class="bg-item-detail">?�국?�업?�력공단</span>
-                        </div>
-                        <span class="bg-item-period">2�?결과 ?�기중</span>
-                    </li>
-                    <li>
-                        <div class="bg-item-main">
-                            <span class="bg-item-title">MOS 2016 Master</span>
-                            <span class="bg-item-detail">Microsoft</span>
-                        </div>
-                        <span class="bg-item-period">2025.06.13</span>
+                        <span class="bg-item-period" th:text="${cert.date}">취득일</span>
                     </li>
                 </ul>
             </div>
@@ -91,119 +60,84 @@
     <!-- TECH STACK -->
     <section id="stack" class="stack-section">
         <div class="sec-eyebrow">Tech Stack</div>
-        <h2 class="sec-title">?�용 기술</h2>
+        <h2 class="sec-title">사용 기술</h2>
 
         <div class="stack-grid">
-            <div class="stack-card">
-                <span class="stack-category">Language</span>
-                <div class="stack-name">Java</div>
-                <p class="stack-desc">MVC ?�키?�처 기반??백엔??로직 ?�계 가??/p>
-            </div>
-            <div class="stack-card">
-                <span class="stack-category">Back-end</span>
-                <div class="stack-name">Spring / Spring Boot</div>
-                <p class="stack-desc">MVC ?�키?�처 기반 백엔???�스??구축, 계층 �?DTO ?�송 �?비즈?�스 로직?�로 구조???�계 가??/p>
-            </div>
-            <div class="stack-card">
-                <span class="stack-category">Back-end</span>
-                <div class="stack-name">Spring Security / JWT</div>
-                <p class="stack-desc">카카?�·구글 ?�셜 로그???�동 �?JWT ?�큰 기반 ?�원가??로그???�증·?��? 로직 ?�계 �?구현</p>
-            </div>
-            <div class="stack-card">
-                <span class="stack-category">Database</span>
-                <div class="stack-name">SQL (MariaDB)</div>
-                <p class="stack-desc">SQLD ?�격 ?��???지?�을 바탕?�로 복잡???�이??추출�?쿼리 최적???�행 가??/p>
-            </div>
-            <div class="stack-card">
-                <span class="stack-category">AI</span>
-                <div class="stack-name">Spring AI</div>
-                <p class="stack-desc">Ollama, OpenAI, Claude 기반 ?�중 모델 ?�업 ?�이?�라?�을 구축?�여 AI 기능 ?�계 �?구현</p>
-            </div>
-            <div class="stack-card">
-                <span class="stack-category">Data</span>
-                <div class="stack-name">Python</div>
-                <p class="stack-desc">?�학???�리?�을 바탕?�로 ?�이???�처리에 ?�용 가??/p>
-            </div>
-            <div class="stack-card">
-                <span class="stack-category">Tools</span>
-                <div class="stack-name">Git / Notion</div>
-                <p class="stack-desc">?�슈·브랜�??�략 기반 ?�업 �??�로?�트 문서??/p>
+            <div class="stack-card" th:each="tech : ${techStacks}">
+                <span class="stack-category" th:text="${tech.category}">Category</span>
+                <div class="stack-name" th:text="${tech.name}">Name</div>
+                <p class="stack-desc" th:text="${tech.desc}">Description</p>
             </div>
         </div>
     </section>
 
     <!-- FEATURED PROJECT -->
     <section id="featured" class="featured-section">
-        <div class="sec-eyebrow">Featured · Web</div>
-        <h2 class="sec-title">petmilyday</h2>
-        <p class="sec-sub">반려?�물??보호?��? ?�한 병원 ?�약·리뷰·커�??�티 ?�합 ?�랫??/p>
+        <div class="sec-eyebrow" th:text="${featured.badge}">Featured · Web</div>
+        <h2 class="sec-title" th:text="${featured.name}">petmilyday</h2>
+        <p class="sec-sub" th:text="${featured.tagline}">tagline</p>
 
         <div class="browser-frame">
             <div class="browser-bar">
                 <span class="browser-dot dot-red"></span>
                 <span class="browser-dot dot-yellow"></span>
                 <span class="browser-dot dot-green"></span>
-                <span class="browser-address">localhost:8080</span>
+                <span class="browser-address" th:text="${featured.urlLabel}">localhost:8080</span>
             </div>
             <div class="browser-body">
-                <img src="./images/petmilyday-preview.png" alt="screenshot">
-                
+                <img th:if="${featured.screenshotUrl}" th:src="@{${featured.screenshotUrl}}" alt="screenshot">
+                <div class="browser-placeholder" th:unless="${featured.screenshotUrl}">
+                    🖼️ 스크린샷 추가 예정
+                </div>
             </div>
         </div>
 
         <ul class="featured-highlights">
-            <li><strong>?�물병원 ?�약</strong> ??병원 검?��????�약, 진료기록 ?�인까�? ?�스??처리</li>
-            <li><strong>AI 증상 ?��?진단</strong> ??간단??증상 ?�력만으�?건강 ?�태 빠르�??�인</li>
-            <li><strong>커�??�티 / 모임</strong> ??게시?? ?��?, 좋아?��? ?�프?�인 모임 ?�청·?�인</li>
-            <li><strong>중고거래</strong> ?????�는 반려?�물 ?�품???�웃�??�누�?거래</li>
+            <li th:each="h : ${featured.highlights}" th:utext="${h}">highlight</li>
         </ul>
 
         <div class="featured-cta">
-            <a href="./projects/petmilyday/index.html" class="btn btn-primary">?�세보기 ??/a>
-            
+            <a th:href="@{${featured.detailUrl}}" class="btn btn-primary">상세보기 →</a>
+            <a th:if="${featured.repoUrl}" th:href="${featured.repoUrl}" target="_blank" class="btn btn-outline">GitHub</a>
         </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="project-section">
         <div class="sec-eyebrow">Projects</div>
-        <h2 class="sec-title">?�른 ?�로?�트</h2>
-        <p class="sec-sub">진행 중이거나 준�?중인 ?�로?�트?�니??</p>
+        <h2 class="sec-title">다른 프로젝트</h2>
+        <p class="sec-sub">진행 중이거나 준비 중인 프로젝트입니다.</p>
 
         <div class="project-grid">
-            <a href="#"
-               class="project-card  is-disabled">
+            <a th:each="p : ${projects}"
+               th:if="${p.slug != 'petmilyday'}"
+               th:href="${p.available} ? @{'/projects/' + ${p.slug}} : '#'"
+               th:classappend="${p.available} ? '' : ' is-disabled'"
+               class="project-card">
 
-                <div class="project-emoji">?��</div>
-                <div class="project-status">준비중</div>
+                <div class="project-emoji" th:text="${p.emoji}">🐾</div>
+                <div class="project-status" th:if="${!p.available}">준비중</div>
 
-                <h3>?�모??/h3>
-                <p class="project-tagline">?�로?�트 준�?중입?�다</p>
+                <h3 th:text="${p.name}">Project</h3>
+                <p class="project-tagline" th:text="${p.tagline}">tagline</p>
 
-                
+                <div class="project-meta" th:if="${p.available}">
+                    <span th:text="${p.period}">2026</span>
+                    <span th:text="${p.role}">Back-end</span>
+                </div>
 
-                
+                <div class="project-badges" th:if="${p.available}">
+                    <span class="badge" th:each="tag : ${p.techBadges}" th:text="${tag}">tag</span>
+                </div>
 
-                
+                <div class="project-link" th:if="${p.available}">자세히 보기 →</div>
             </a>
         </div>
     </section>
 
 </main>
 
-<footer id="contact" class="site-footer">
-    <div class="footer-inner">
-        <div class="footer-title">감사?�니??<br>??부?�드립니??</div>
-        <div class="footer-contact">
-            <span>?�� <span>010-7540-4991</span></span>
-            <span>?�️ <span>ldg7711@gmail.com</span></span>
-            <span>
-                ?�� <a href="https://github.com/endy7540" target="_blank" style="color:inherit;">https://github.com/endy7540</a>
-            </span>
-        </div>
-    </div>
-</footer>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>
-

@@ -1,9 +1,9 @@
-server:
+﻿server:
   port: 8090
 
 spring:
   application:
-    name: petmilyday-portfolio
+    name: LeeDonghyuk-portfolio
   thymeleaf:
     cache: false
 

@@ -1,4 +1,4 @@
-package com.petmilyday.portfolio;
+package com.leedonghyuk.portfolio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

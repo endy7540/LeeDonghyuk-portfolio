@@ -1,7 +1,7 @@
-package com.petmilyday.portfolio.config;
+package com.leedonghyuk.portfolio.config;
 
-import com.petmilyday.portfolio.data.PortfolioData;
-import com.petmilyday.portfolio.dto.ProfileDTO;
+import com.leedonghyuk.portfolio.data.PortfolioData;
+import com.leedonghyuk.portfolio.dto.ProfileDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;

@@ -1,6 +1,6 @@
-package com.petmilyday.portfolio.controller;
+package com.leedonghyuk.portfolio.controller;
 
-import com.petmilyday.portfolio.data.PortfolioData;
+import com.leedonghyuk.portfolio.data.PortfolioData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

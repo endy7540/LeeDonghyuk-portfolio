@@ -1,4 +1,4 @@
-package com.petmilyday.portfolio.dto;
+package com.leedonghyuk.portfolio.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
