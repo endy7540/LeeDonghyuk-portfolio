@@ -1,7 +1,6 @@
 package com.leedonghyuk.portfolio.data;
 
 import com.leedonghyuk.portfolio.dto.*;
-import com.petmilyday.portfolio.dto.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
