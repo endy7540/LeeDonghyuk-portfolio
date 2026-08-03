@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${profile.name} + ' | Portfolio'">Portfolio</title>
+    <title>이동혁 | Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body id="top">
 
-<div th:replace="~{fragments/header :: header}"></div>
+<header class="site-header">
+    <nav class="nav">
+        <a href="/" class="nav-logo">portfolio</a>
+        <div class="nav-links">
+            <a href="/">소개</a>
+            <a href="/projects/petmilyday">petmilyday</a>
+            <a href="/projects/planslot">Planslot</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+</header>
 
 <main>
 
@@ -17,10 +27,10 @@
     <section class="hero">
         <div class="hero-badge">👋 Portfolio</div>
         <h1>
-            <span th:text="${profile.name}">이름</span><br>
-            <span th:text="${profile.tagline}">한 줄 소개</span>
+            <span>이동혁</span><br>
+            <span>팀과 함께 성장하는 백엔드 개발자</span>
         </h1>
-        <p class="hero-desc" th:text="${profile.bio}">자기소개 문단</p>
+        <p class="hero-desc">컴퓨터전자공학을 전공으로 배우며 하드웨어와 소프트웨어의 구조를 통합적으로 배웠습니다. 동시에 대우능력개발원의 AI 에이전트 클라우드·보안 코딩 개발자 양성 과정을 통해 백엔드 개발자로서의 전문성을 키웠습니다. 어릴 때부터 수학적으로 사고하는 것을 좋아했고, 코딩의 논리로 문제를 풀어나가는 매력에 이끌려 개발자의 길을 걷게 되었습니다. 팀 프로젝트에서의 소통과 협업 경험을 바탕으로, 혼자보다는 팀과 함께 성장하는 개발자가 되겠습니다.</p>
         <div class="hero-cta">
             <a href="#featured" class="btn btn-primary">프로젝트 보기</a>
             <a href="#stack" class="btn btn-outline">기술 스택 보기</a>
@@ -35,10 +45,10 @@
                 <ul class="background-list">
                     <li th:each="edu : ${educations}">
                         <div class="bg-item-main">
-                            <span class="bg-item-title" th:text="${edu.name}">학교명</span>
-                            <span class="bg-item-detail" th:text="${edu.detail}">전공/과정</span>
+                            <span class="bg-item-title" th:text="${edu.name}"></span>
+                            <span class="bg-item-detail" th:text="${edu.detail}"></span>
                         </div>
-                        <span class="bg-item-period" th:text="${edu.period}">기간</span>
+                        <span class="bg-item-period" th:text="${edu.period}"></span>
                     </li>
                 </ul>
             </div>
@@ -47,10 +57,10 @@
                 <ul class="background-list">
                     <li th:each="cert : ${certifications}">
                         <div class="bg-item-main">
-                            <span class="bg-item-title" th:text="${cert.name}">자격증명</span>
-                            <span class="bg-item-detail" th:text="${cert.issuer}">발행처</span>
+                            <span class="bg-item-title" th:text="${cert.name}"></span>
+                            <span class="bg-item-detail" th:text="${cert.issuer}"></span>
                         </div>
-                        <span class="bg-item-period" th:text="${cert.date}">취득일</span>
+                        <span class="bg-item-period" th:text="${cert.date}"></span>
                     </li>
                 </ul>
             </div>
@@ -64,9 +74,9 @@
 
         <div class="stack-grid">
             <div class="stack-card" th:each="tech : ${techStacks}">
-                <span class="stack-category" th:text="${tech.category}">Category</span>
-                <div class="stack-name" th:text="${tech.name}">Name</div>
-                <p class="stack-desc" th:text="${tech.desc}">Description</p>
+                <span class="stack-category" th:text="${tech.category}"></span>
+                <div class="stack-name" th:text="${tech.name}"></div>
+                <p class="stack-desc" th:text="${tech.desc}"></p>
             </div>
         </div>
     </section>
@@ -75,7 +85,7 @@
     <section id="featured" class="featured-section">
         <div class="sec-eyebrow" th:text="${featured.badge}">Featured · Web</div>
         <h2 class="sec-title" th:text="${featured.name}">petmilyday</h2>
-        <p class="sec-sub" th:text="${featured.tagline}">tagline</p>
+        <p class="sec-sub" th:text="${featured.tagline}">반려동물의 보호자를 위한 병원 예약·리뷰·커뮤니티 통합 플랫폼</p>
 
         <div class="browser-frame">
             <div class="browser-bar">
@@ -85,59 +95,68 @@
                 <span class="browser-address" th:text="${featured.urlLabel}">localhost:8080</span>
             </div>
             <div class="browser-body">
-                <img th:if="${featured.screenshotUrl}" th:src="@{${featured.screenshotUrl}}" alt="screenshot">
-                <div class="browser-placeholder" th:unless="${featured.screenshotUrl}">
-                    🖼️ 스크린샷 추가 예정
-                </div>
+                <img th:src="${featured.screenshotUrl}" alt="screenshot">
             </div>
         </div>
 
         <ul class="featured-highlights">
-            <li th:each="h : ${featured.highlights}" th:utext="${h}">highlight</li>
+            <li th:each="highlight : ${featured.highlights}" th:utext="${highlight}"></li>
         </ul>
 
+
+
         <div class="featured-cta">
-            <a th:href="@{${featured.detailUrl}}" class="btn btn-primary">상세보기 →</a>
-            <a th:if="${featured.repoUrl}" th:href="${featured.repoUrl}" target="_blank" class="btn btn-outline">GitHub</a>
+            <a th:href="${featured.detailUrl}" class="btn btn-primary">상세보기 →</a>
         </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="project-section">
-        <div class="sec-eyebrow">Projects</div>
-        <h2 class="sec-title">다른 프로젝트</h2>
-        <p class="sec-sub">진행 중이거나 준비 중인 프로젝트입니다.</p>
+    <!-- Planslot PROJECT -->
+    <section id="planslot-project" class="featured-section" style="background-color: #f9f9f9;">
+        <div class="sec-eyebrow">Web Application</div>
+        <h2 class="sec-title">Planslot</h2>
+        <p class="sec-sub">개인 및 팀을 위한 일정 관리 솔루션</p>
 
-        <div class="project-grid">
-            <a th:each="p : ${projects}"
-               th:if="${p.slug != 'petmilyday'}"
-               th:href="${p.available} ? @{'/projects/' + ${p.slug}} : '#'"
-               th:classappend="${p.available} ? '' : ' is-disabled'"
-               class="project-card">
-
-                <div class="project-emoji" th:text="${p.emoji}">🐾</div>
-                <div class="project-status" th:if="${!p.available}">준비중</div>
-
-                <h3 th:text="${p.name}">Project</h3>
-                <p class="project-tagline" th:text="${p.tagline}">tagline</p>
-
-                <div class="project-meta" th:if="${p.available}">
-                    <span th:text="${p.period}">2026</span>
-                    <span th:text="${p.role}">Back-end</span>
+        <div class="browser-frame">
+            <div class="browser-bar">
+                <span class="browser-dot dot-red"></span>
+                <span class="browser-dot dot-yellow"></span>
+                <span class="browser-dot dot-green"></span>
+                <span class="browser-address">http://13.209.22.21.nip.io:8181/</span>
+            </div>
+            <a href="http://13.209.22.21.nip.io:8181/" target="_blank" rel="noopener noreferrer">
+                <div class="browser-body">
+                    <img src="/images/Planslot-preview.png" alt="Planslot screenshot">
                 </div>
-
-                <div class="project-badges" th:if="${p.available}">
-                    <span class="badge" th:each="tag : ${p.techBadges}" th:text="${tag}">tag</span>
-                </div>
-
-                <div class="project-link" th:if="${p.available}">자세히 보기 →</div>
             </a>
+        </div>
+
+        <ul class="featured-highlights">
+            <li><strong>개인 캘린더</strong> — 개인의 일정을 등록하고 관리</li>
+            <li><strong>게시판</strong> — 사람들과의 소통 및 원하는 관련 모임을 찾는 기능</li>
+            <li><strong>모임 캘린더</strong> — 모임원과 캘린더를 공유하고, 공동의 일정을 등록 및 관리</li>
+            <li><strong>AI 기능</strong> — 이미지의 일정 자동 추출, 채팅방 내용 요약 및 일정 추출 /
+                <br>모임원들의 일정을 인식하여 공통으로 가능한 시간 찾아주는 기능</li>
+        </ul>
+
+        <div class="featured-cta">
+            <a href="/projects/planslot" class="btn btn-primary">상세보기 →</a>
         </div>
     </section>
 
 </main>
 
-<div th:replace="~{fragments/footer :: footer}"></div>
+<footer id="contact" class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-title">감사합니다.<br>잘 부탁드립니다.</div>
+        <div class="footer-contact">
+            <span>📞 <span>010-7540-4991</span></span>
+            <span>✉️ <span>ldg7711@gmail.com</span></span>
+            <span>
+                🔗 <a href="https://github.com/endy7540" target="_blank" style="color:inherit;">https://github.com/endy7540</a>
+            </span>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>

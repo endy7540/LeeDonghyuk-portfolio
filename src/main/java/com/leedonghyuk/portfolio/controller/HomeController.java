@@ -19,6 +19,7 @@ public class HomeController {
         model.addAttribute("featured", portfolioData.featuredProject());
         model.addAttribute("educations", portfolioData.educations());
         model.addAttribute("certifications", portfolioData.certifications());
+        model.addAttribute("petmilydayDetail", portfolioData.petmilydayDetail());
         return "index";
     }
 }

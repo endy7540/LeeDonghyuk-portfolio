@@ -9,10 +9,10 @@ import java.util.List;
  * 포트폴리오 사이트에 쓰일 콘텐츠를 코드로 관리한다.
  * DB 없이 정적 텍스트만 다루므로 코드 내 상수로 관리한다.
  *
- * 새 프로젝트(ex. 널모아)를 추가하려면:
+ * 새 프로젝트(ex. Planslot)를 추가하려면:
  *   1) projectSummaries()에 ProjectSummaryDTO 카드 추가 (available = true로)
- *   2) 이 클래스에 nulmoaDetail() 같은 메서드를 추가로 만들고
- *   3) ProjectController에 "/projects/nulmoa" 라우팅 메서드 추가
+ *   2) 이 클래스에 planslotDetail() 같은 메서드를 추가로 만들고
+ *   3) ProjectController에 "/projects/planslot" 라우팅 메서드 추가
  */
 @Component
 public class PortfolioData {
@@ -106,14 +106,14 @@ public class PortfolioData {
                         .build(),
 
                 ProjectSummaryDTO.builder()
-                        .slug("nulmoa")
-                        .name("널모아")
-                        .tagline("프로젝트 준비 중입니다")
-                        .period("진행중")
-                        .role("")
-                        .emoji("🧩")
-                        .available(false)
-                        .techBadges(List.of())
+                        .slug("planslot")
+                        .name("Planslot")
+                        .tagline("개인 및 팀을 위한 일정 관리 솔루션")
+                        .period("2025")
+                        .role("Back-end Engineer")
+                        .emoji("📅")
+                        .available(true)
+                        .techBadges(List.of("Spring Boot", "JPA", "Thymeleaf"))
                         .build()
         );
     }
@@ -211,6 +211,55 @@ public class PortfolioData {
                                 .result(List.of(
                                         "방장 승인 기반 참여 관리 기능을 엔티티 책임 분리를 통해 구현",
                                         "정원 초과·재모집 전환 등 상태 전이 로직의 오류 발생 여지를 엔티티 내부로 응집"
+                                ))
+                                .build()
+                ))
+                .build();
+    }
+
+    // ---------- Planslot 상세 ----------
+    public ProjectDetailDTO planslotDetail() {
+        return ProjectDetailDTO.builder()
+                .name("Planslot")
+                .tagline("개인 및 팀을 위한 일정 관리 솔루션")
+                .description("개인의 할 일, 팀 프로젝트의 칸반 보드, 공유 캘린더 기능을 통합하여 체계적인 일정 관리를 돕는 웹 애플리케이션입니다.")
+                .period("2025")
+                .teamSize("1인")
+                .role("Back-end, Front-end")
+                .features(List.of(
+                        FeatureDTO.builder().icon("✅").title("개인 할 일 관리").desc("체크리스트 기반으로 개인의 할 일을 등록하고 관리").build(),
+                        FeatureDTO.builder().icon("📊").title("칸반 보드").desc("팀 프로젝트의 작업을 칸반 보드 형식으로 시각화하고 진행 상황 추적").build(),
+                        FeatureDTO.builder().icon("📅").title("공유 캘린더").desc("팀원과 캘린더를 공유하고, 공동의 일정을 등록 및 관리").build(),
+                        FeatureDTO.builder().icon("🔔").title("알림 기능").desc("마감일, 새로운 댓글 등 주요 변경 사항에 대한 이메일 및 앱 내 알림").build()
+                ))
+                .techStacks(List.of(
+                        TechStackDTO.builder().category("Language").name("Java 11").build(),
+                        TechStackDTO.builder().category("Back-end").name("Spring Boot 2.7").build(),
+                        TechStackDTO.builder().category("Front-end").name("Thymeleaf").build(),
+                        TechStackDTO.builder().category("Database").name("H2 / MySQL").build(),
+                        TechStackDTO.builder().category("Tools").name("Gradle").build()
+                ))
+                .caseStudies(List.of(
+                        CaseStudyDTO.builder()
+                                .badge("아키텍처")
+                                .title("서버 사이드 렌더링과 MVC 패턴")
+                                .summary("Spring MVC와 Thymeleaf를 활용한 서버 사이드 렌더링(SSR) 아키텍처 설계 및 구현")
+                                .problem(List.of(
+                                        "빠른 프로토타이핑과 단일 개발자의 생산성을 고려하여, 복잡한 Front-end 프레임워크 없이 웹 애플리케이션을 구축해야 했음",
+                                        "데이터와 뷰의 분리를 통해 유지보수성을 높이고, 일관된 사용자 경험을 제공해야 하는 과제"
+                                ))
+                                .approach(List.of(
+                                        "Spring Boot의 MVC 패턴을 기반으로 Controller, Service, Repository 계층을 명확히 분리",
+                                        "Thymeleaf 템플릿 엔진을 사용하여 서버에서 동적으로 HTML을 생성하는 서버 사이드 렌더링 방식 채택"
+                                ))
+                                .action(List.of(
+                                        "각 도메인(할 일, 칸반, 캘린더)별로 Controller를 분리하고, `Model` 객체를 통해 뷰에 필요한 데이터를 전달",
+                                        "Thymeleaf의 `th:each`, `th:if` 등의 속성을 활용하여 동적인 UI를 구성하고, 레이아웃 기능을 통해 중복 코드 최소화",
+                                        "정적 리소스(CSS, JS)는 `src/main/resources/static` 에 배치하여 Spring Boot가 자동으로 관리하도록 설정"
+                                ))
+                                .result(List.of(
+                                        "Front-end와 Back-end 기술 스택을 단순화하여 1인 개발 생산성 극대화",
+                                        "데이터와 뷰의 관심사를 분리하여 코드의 유지보수성 및 가독성 향상"
                                 ))
                                 .build()
                 ))

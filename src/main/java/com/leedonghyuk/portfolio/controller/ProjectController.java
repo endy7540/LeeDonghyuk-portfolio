@@ -18,11 +18,9 @@ public class ProjectController {
         return "project-detail";
     }
 
-    // 널모아 준비되면 아래처럼 추가하면 됩니다.
-    //
-    // @GetMapping("/projects/nulmoa")
-    // public String nulmoa(Model model) {
-    //     model.addAttribute("project", portfolioData.nulmoaDetail());
-    //     return "project-detail";
-    // }
+    @GetMapping("/projects/planslot")
+    public String planslot(Model model) {
+        model.addAttribute("project", portfolioData.planslotDetail());
+        return "project-detail";
+    }
 }
